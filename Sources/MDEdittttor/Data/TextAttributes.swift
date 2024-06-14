@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  TextAttributes.swift
 //  MDEdittttor
 //
 //  Created by Eugene Kovs on 14.06.2024.
