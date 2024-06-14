@@ -8,10 +8,7 @@
 
 import UIKit
 
-/**
- *  Highlighter that uses a regular expression to match character
- *  sequences to highlight.
- */
+/// Highlighter that uses a regular expression to match character sequences to highlight.
 open class RegularExpressionHighlighter: HighlighterType {
     fileprivate let regularExpression: NSRegularExpression
     fileprivate let attributes: TextAttributes
@@ -33,11 +30,13 @@ open class RegularExpressionHighlighter: HighlighterType {
     }
     
     // MARK: Helpers
-    /// Enumerates all matches of the regular expression in the given string and executes a block for each match. This method searches the provided string for matches of the regular expression and executes the provided closure for each match found. The closure receives an `NSTextCheckingResult` object, which contains information about the match, including the range of the match in the string.
+    /// Enumerates all matches of the regular expression in the given string and executes a block for each match.
     /// - Parameters:
     ///   - regex: The regular expression to use for matching.
     ///   - string: The string to search for matches.
     ///   - block: A closure to execute for each match found. The closure takes a single parameter, `NSTextCheckingResult`, which represents the match found.
+    ///
+    ///   This method searches the provided string for matches of the regular expression and executes the provided closure for each match found. The closure receives an `NSTextCheckingResult` object, which contains information about the match, including the range of the match in the string.
     fileprivate func enumerateMatches(_ regex: NSRegularExpression, string: String, using block: (NSTextCheckingResult) -> Void) {
         let range = NSRange(location: 0, length: (string as NSString).length)
         regex.enumerateMatches(in: string, options: [], range: range) { (result, _, _) in

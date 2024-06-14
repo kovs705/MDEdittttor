@@ -8,21 +8,15 @@
 
 import UIKit
 
-/**
- *  Text storage with support for highlighting Markdown.
- */
+/// Text storage with support for highlighting Markdown.
 open class MarkdownTextStorage: HighlighterTextStorage {
     fileprivate let attributes: MarkdownAttributes
     
     // MARK: Initialization
     
-    /**
-     Creates a new instance of the receiver.
-     
-     - Parameter attributes: Attributes used to style the text.
-     
-     - Returns: An initialized instance of MarkdownTextStorage
-     */
+    /// Creates a new instance of the receiver.
+    ///   - Parameter attributes: Attributes used to style the text.
+    ///   - Returns: An initialized instance of MarkdownTextStorage
     public init(attributes: MarkdownAttributes = MarkdownAttributes()) {
         self.attributes = attributes
         super.init()

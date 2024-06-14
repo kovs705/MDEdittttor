@@ -8,10 +8,7 @@
 
 import UIKit
 
-/**
-*  Text storage with support for automatically highlighting text
-*  as it changes.
-*/
+/// Text storage with support for automatically highlighting text as it changes.
 open class HighlighterTextStorage: NSTextStorage {
     fileprivate let backingStore: NSMutableAttributedString
     fileprivate var highlighters = [HighlighterType]()
@@ -25,13 +22,10 @@ open class HighlighterTextStorage: NSTextStorage {
     
     // MARK: API
     
-    /**
-    Adds a highlighter to use for highlighting text.
-    
-    Highlighters are invoked in the order in which they are added.
-    
-    - Parameter highlighter: The highlighter to add.
-    */
+    /// Adds a highlighter to use for highlighting text.
+    ///  - Parameter highlighter: The highlighter to add.
+    ///
+    ///Highlighters are invoked in the order in which they are added.
     open func addHighlighter(_ highlighter: HighlighterType) {
         highlighters.append(highlighter)
         editedAll(.editedAttributes)
@@ -43,7 +37,7 @@ open class HighlighterTextStorage: NSTextStorage {
         backingStore = NSMutableAttributedString(string: "", attributes: defaultAttributes)
         super.init()
     }
-
+    
     required public init?(coder aDecoder: NSCoder) {
         backingStore = NSMutableAttributedString(string: "", attributes: defaultAttributes)
         super.init(coder: aDecoder)
@@ -69,17 +63,17 @@ open class HighlighterTextStorage: NSTextStorage {
         edited(.editedAttributes, range: range, changeInLength: 0)
     }
     
-//    open override func processEditing() {
-//        // This is inefficient but necessary because certain
-//        // edits can cause formatting changes that span beyond
-//        // line or paragraph boundaries. This should be alright
-//        // for small amounts of text (which is the use case that
-//        // this was designed for), but would need to be optimized
-//        // for any kind of heavy editing.
-//        
-//        highlightRange(NSRange(location: 0, length: (string as NSString).length))
-//        super.processEditing()
-//    }
+    //    open override func processEditing() {
+    //        // This is inefficient but necessary because certain
+    //        // edits can cause formatting changes that span beyond
+    //        // line or paragraph boundaries. This should be alright
+    //        // for small amounts of text (which is the use case that
+    //        // this was designed for), but would need to be optimized
+    //        // for any kind of heavy editing.
+    //
+    //        highlightRange(NSRange(location: 0, length: (string as NSString).length))
+    //        super.processEditing()
+    //    }
     
     open override func processEditing() {
         // Optimize by only highlighting the edited range
