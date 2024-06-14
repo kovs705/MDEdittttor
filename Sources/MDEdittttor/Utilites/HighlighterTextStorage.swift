@@ -69,14 +69,22 @@ open class HighlighterTextStorage: NSTextStorage {
         edited(.editedAttributes, range: range, changeInLength: 0)
     }
     
+//    open override func processEditing() {
+//        // This is inefficient but necessary because certain
+//        // edits can cause formatting changes that span beyond
+//        // line or paragraph boundaries. This should be alright
+//        // for small amounts of text (which is the use case that
+//        // this was designed for), but would need to be optimized
+//        // for any kind of heavy editing.
+//        
+//        highlightRange(NSRange(location: 0, length: (string as NSString).length))
+//        super.processEditing()
+//    }
+    
     open override func processEditing() {
-        // This is inefficient but necessary because certain
-        // edits can cause formatting changes that span beyond
-        // line or paragraph boundaries. This should be alright
-        // for small amounts of text (which is the use case that
-        // this was designed for), but would need to be optimized
-        // for any kind of heavy editing.
-        highlightRange(NSRange(location: 0, length: (string as NSString).length))
+        // Optimize by only highlighting the edited range
+        let extendedRange = NSUnionRange(self.editedRange, (string as NSString).lineRange(for: NSRange(location: self.editedRange.location, length: 0)))
+        highlightRange(extendedRange)
         super.processEditing()
     }
     
