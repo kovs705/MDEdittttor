@@ -9,12 +9,6 @@
 import UIKit
 
 /// Text view with support for highlighting Markdown syntax.
-///
-/// MDEdittttor becomes the delegate of itself by default. If you define a new delegate, you must implement:
-///   - textView(_:shouldChangeTextIn:replacementText:)
-///   - textViewDidChange(_:)
-///
-///   method, and call super() implementation at first.
 open class MDEdittttor: UITextView, UITextViewDelegate {
     
     /// Default markdown text view init method. Style for this project. Using modified markdown attributes file.
@@ -28,6 +22,7 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
         }
         textStorage.addHighlighter(MDStrikethrough())
         textStorage.addHighlighter(MDSuperscript())
+        
         if let codeBlockAttributes = attributes.codeBlockAttributes {
             textStorage.addHighlighter(MDFencedCode(attributes: codeBlockAttributes))
         }
@@ -52,6 +47,9 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
         
         // Implement delegate to respond to enter operation.
         self.delegate = self
+        
+        // Highlight all text initially
+        textStorage.highlightAllText()
     }
     
     required public init?(coder aDecoder: NSCoder) {

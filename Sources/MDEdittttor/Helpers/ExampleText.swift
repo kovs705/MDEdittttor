@@ -30,7 +30,7 @@ import SwiftUI
 
 func createCoolEditor() -> MDEdittttor {}
 ```
-At this moment there are no highlights for different language, but I hope there will be in the future releases.. yep..
+At this moment there are no highlights for different languages, but I hope there will be in the future releases.. yep..
 
 Let's get to the author's [GitHub Page](github.com/kovs705)
 

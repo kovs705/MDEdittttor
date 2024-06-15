@@ -39,7 +39,7 @@ extension HighlighterType {
     ///  - Returns: A compiled `NSRegularExpression` object.
     static func regexFromPattern(_ pattern: String) -> NSRegularExpression {
         do {
-            return try NSRegularExpression(pattern: pattern, options: [])
+            return try NSRegularExpression(pattern: pattern, options: [.anchorsMatchLines])
         } catch {
             fatalError("Invalid regex pattern: \(pattern)")
         }
