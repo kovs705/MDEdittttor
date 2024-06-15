@@ -35,6 +35,8 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
         let textView = MDEdittttor(frame: .zero, textStorage: textStorage)
         textView.translatesAutoresizingMaskIntoConstraints = false
         
+        textStorage.highlightAllText()
+        
         return textView
     }
     

@@ -19,27 +19,27 @@ public struct MarkdownAttributes {
     
     public struct HeaderAttributes {
         public var h1Attributes: TextAttributes? = [
-            .font: UIFont.preferredFont(forTextStyle: .headline)
+            .font: UIFont.preferredFont(forTextStyle: .largeTitle)
         ]
         
         public var h2Attributes: TextAttributes? = [
-            .font: UIFont.preferredFont(forTextStyle: .headline)
+            .font: UIFont.preferredFont(forTextStyle: .title1)
         ]
         
         public var h3Attributes: TextAttributes? = [
-            .font: UIFont.preferredFont(forTextStyle: .headline)
+            .font: UIFont.preferredFont(forTextStyle: .title2)
         ]
         
         public var h4Attributes: TextAttributes? = [
-            .font: UIFont.preferredFont(forTextStyle: .subheadline)
+            .font: UIFont.preferredFont(forTextStyle: .title3)
         ]
         
         public var h5Attributes: TextAttributes? = [
-            .font: UIFont.preferredFont(forTextStyle: .subheadline)
+            .font: UIFont.preferredFont(forTextStyle: .headline)
         ]
         
         public var h6Attributes: TextAttributes? = [
-            .font: UIFont.preferredFont(forTextStyle: .subheadline)
+            .font: UIFont.preferredFont(forTextStyle: .headline)
         ]
         
         func attributesForHeaderLevel(_ level: Int) -> TextAttributes? {

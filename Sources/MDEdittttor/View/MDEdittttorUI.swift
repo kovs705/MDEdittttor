@@ -51,3 +51,9 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
         }
     }
 }
+
+@available(iOS 15.0, *)
+#Preview(body: {
+    @State var text = "\(ExampleText.hello)"
+    return MDEdittttorWrapper(text: $text)
+})

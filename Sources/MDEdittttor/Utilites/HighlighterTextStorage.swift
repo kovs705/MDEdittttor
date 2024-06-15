@@ -96,4 +96,9 @@ open class HighlighterTextStorage: NSTextStorage {
         replaceCharacters(in: range, with: attrString)
         backingStore.endEditing()
     }
+    
+    /// Highlights the entire text initially
+    open func highlightAllText() {
+        highlightRange(NSRange(location: 0, length: backingStore.length))
+    }
 }
