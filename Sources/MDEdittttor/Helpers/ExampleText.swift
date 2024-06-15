@@ -42,6 +42,7 @@ And a list for your plans like:
 * Travel to Japan
 * Try new language
 * Explore the new shop nearby
+
 """
     }
 }
