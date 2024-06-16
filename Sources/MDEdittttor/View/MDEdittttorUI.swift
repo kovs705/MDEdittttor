@@ -22,6 +22,7 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
     public func makeUIView(context: Context) -> MDEdittttor {
         let editor = MDEdittttor.defaultMarkdownTextView()
         editor.delegate = context.coordinator
+        editor.isScrollEnabled = false
         return editor
     }
     
