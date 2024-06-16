@@ -14,11 +14,9 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
     public typealias UIViewType = MDEdittttor
     
     @Binding public var text: String
-    @Binding public var height: CGFloat
     
-    public init(text: Binding<String>, height: Binding<CGFloat>) {
+    public init(text: Binding<String>) {
         self._text = text
-        self._height = height
     }
     
     public func makeUIView(context: Context) -> MDEdittttor {
@@ -58,6 +56,5 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
 @available(iOS 15.0, *)
 #Preview(body: {
     @State var text = "\(ExampleText.hello)"
-    @State var height: CGFloat = 100
-    return MDEdittttorWrapper(text: $text, height: $height)
+    return MDEdittttorWrapper(text: $text)
 })
