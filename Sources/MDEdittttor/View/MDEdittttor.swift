@@ -50,6 +50,10 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
         
         // Highlight all text initially
         textStorage.highlightAllText()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        self.superview?.addGestureRecognizer(tapGesture)
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -124,7 +128,6 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
     }
     
     // MARK: - Override
-    
     override open func caretRect(for position: UITextPosition) -> CGRect {
         var originalRect = super.caretRect(for: position)
         originalRect.size.height = (font?.lineHeight ?? 16) + 3
@@ -132,8 +135,12 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
     }
     
     // MARK: - Tool
-    
     func isReturn(_ text: String) -> Bool {
         return text == "\n"
+    }
+    
+    // MARK: - Keyboard
+    @objc func dismissKeyboard() {
+        self.resignFirstResponder()
     }
 }
