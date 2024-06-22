@@ -14,6 +14,7 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
     public typealias UIViewType = MDEdittttor
     
     @Binding public var text: String
+    @State private var dynamicHeight: CGFloat = 100
     
     public init(text: Binding<String>) {
         self._text = text
@@ -22,19 +23,20 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
     public func makeUIView(context: Context) -> MDEdittttor {
         let editor = MDEdittttor.defaultMarkdownTextView()
         editor.delegate = context.coordinator
-        editor.isScrollEnabled = false
+        editor.isScrollEnabled = true
         return editor
     }
     
     public func updateUIView(_ uiView: MDEdittttor, context: Context) {
+        
+        DispatchQueue.main.async {
+            self.dynamicHeight = uiView.contentSize.height
+        }
+        
         if uiView.text != text {
             uiView.text = text
         }
         
-        uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
-        uiView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
-        uiView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
-        uiView.setContentCompressionResistancePriority(.required, for: .vertical)
     }
     
     public func makeCoordinator() -> Coordinator {
