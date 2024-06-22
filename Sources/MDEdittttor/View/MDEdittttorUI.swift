@@ -30,6 +30,11 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
         if uiView.text != text {
             uiView.text = text
         }
+        
+        uiView.setContentHuggingPriority(.defaultHigh, for: .vertical)
+        uiView.setContentHuggingPriority(.defaultHigh, for: .horizontal)
+        uiView.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        uiView.setContentCompressionResistancePriority(.required, for: .vertical)
     }
     
     public func makeCoordinator() -> Coordinator {
