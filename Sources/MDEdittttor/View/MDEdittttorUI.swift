@@ -9,7 +9,7 @@
 import SwiftUI
 import UIKit
 
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 public struct MDEdittttorWrapper: UIViewRepresentable {
     public typealias UIViewType = MDEdittttor
     
@@ -24,6 +24,8 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
         let editor = MDEdittttor.defaultMarkdownTextView()
         editor.delegate = context.coordinator
         editor.isScrollEnabled = true
+        editor.textContainer.lineFragmentPadding = 0
+        editor.textContainerInset = .zero
         return editor
     }
     
@@ -37,6 +39,36 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
             uiView.text = text
         }
         
+    }
+    
+    func sizeThatFits(_ proposal: ProposedViewSize, uiView: UITextView, context: Context) -> CGSize? {
+        let dimensions = proposal.replacingUnspecifiedDimensions(
+            by: .init(
+                width: 0,
+                height: CGFloat.greatestFiniteMagnitude
+            )
+        )
+        
+        let calculatedHeight = calculateTextViewHeight(
+            containerSize: dimensions,
+            attributedString: uiView.attributedText
+        )
+        
+        return .init(
+            width: dimensions.width,
+            height: calculatedHeight
+        )
+    }
+    
+    private func calculateTextViewHeight(containerSize: CGSize,
+                                         attributedString: NSAttributedString) -> CGFloat {
+        let boundingRect = attributedString.boundingRect(
+            with: .init(width: containerSize.width, height: .greatestFiniteMagnitude),
+            options: [.usesLineFragmentOrigin, .usesFontLeading],
+            context: nil
+        )
+        
+        return boundingRect.height
     }
     
     public func makeCoordinator() -> Coordinator {
@@ -60,8 +92,11 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
     }
 }
 
-@available(iOS 15.0, *)
+@available(iOS 16.0, *)
 #Preview(body: {
     @State var text = "\(ExampleText.hello)"
-    return MDEdittttorWrapper(text: $text)
+    return VStack {
+        Text("Hello")
+        MDEdittttorWrapper(text: $text)
+    }
 })
