@@ -15,6 +15,11 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
     @Binding public var text: String
     @Binding public var height: CGFloat
     
+    public init(text: Binding<String>, height: Binding<CGFloat>) {
+        self._text = text
+        self._height = height
+    }
+    
     public func makeUIView(context: Context) -> MDEdittttor {
         let editor = MDEdittttor.defaultMarkdownTextView()
         
