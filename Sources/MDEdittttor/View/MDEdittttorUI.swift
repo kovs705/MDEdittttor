@@ -11,64 +11,28 @@ import UIKit
 
 @available(iOS 16.0, *)
 public struct MDEdittttorWrapper: UIViewRepresentable {
-    public typealias UIViewType = MDEdittttor
     
     @Binding public var text: String
-    @State private var dynamicHeight: CGFloat = 100
-    
-    public init(text: Binding<String>) {
-        self._text = text
-    }
+    @Binding public var height: CGFloat
     
     public func makeUIView(context: Context) -> MDEdittttor {
         let editor = MDEdittttor.defaultMarkdownTextView()
+        
         editor.delegate = context.coordinator
-        editor.isScrollEnabled = true
         editor.textContainer.lineFragmentPadding = 0
         editor.textContainerInset = .zero
+        
         return editor
     }
     
     public func updateUIView(_ uiView: MDEdittttor, context: Context) {
-        
-        DispatchQueue.main.async {
-            self.dynamicHeight = uiView.contentSize.height
-        }
-        
         if uiView.text != text {
             uiView.text = text
         }
         
-    }
-    
-    func sizeThatFits(_ proposal: ProposedViewSize, uiView: UITextView, context: Context) -> CGSize? {
-        let dimensions = proposal.replacingUnspecifiedDimensions(
-            by: .init(
-                width: 0,
-                height: CGFloat.greatestFiniteMagnitude
-            )
-        )
-        
-        let calculatedHeight = calculateTextViewHeight(
-            containerSize: dimensions,
-            attributedString: uiView.attributedText
-        )
-        
-        return .init(
-            width: dimensions.width,
-            height: calculatedHeight
-        )
-    }
-    
-    private func calculateTextViewHeight(containerSize: CGSize,
-                                         attributedString: NSAttributedString) -> CGFloat {
-        let boundingRect = attributedString.boundingRect(
-            with: .init(width: containerSize.width, height: .greatestFiniteMagnitude),
-            options: [.usesLineFragmentOrigin, .usesFontLeading],
-            context: nil
-        )
-        
-        return boundingRect.height
+        DispatchQueue.main.async {
+            self.height = uiView.contentSize.height
+        }
     }
     
     public func makeCoordinator() -> Coordinator {
@@ -95,8 +59,9 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
 @available(iOS 16.0, *)
 #Preview(body: {
     @State var text = "\(ExampleText.hello)"
-    return VStack {
-        Text("Hello")
-        MDEdittttorWrapper(text: $text)
-    }
+    @State var height: CGFloat = 100
+    
+    return MDEdittttorWrapper(text: $text, height: $height)
+        .frame(minHeight: height)
+        .padding()
 })

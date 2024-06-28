@@ -57,7 +57,6 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
     }
     
     // MARK: - UITextViewDelegate
-    
     let markdownListRegularExpression = try! NSRegularExpression(pattern: "^[-*] ", options: .caseInsensitive)
     let markdownNumberListRegularExpression = try! NSRegularExpression(pattern: "^\\d*\\. ", options: .caseInsensitive)
     
@@ -124,7 +123,6 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
     }
     
     // MARK: - Override
-    
     override open func caretRect(for position: UITextPosition) -> CGRect {
         var originalRect = super.caretRect(for: position)
         originalRect.size.height = (font?.lineHeight ?? 16) + 3
@@ -132,7 +130,6 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
     }
     
     // MARK: - Tool
-    
     func isReturn(_ text: String) -> Bool {
         return text == "\n"
     }
