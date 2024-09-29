@@ -53,6 +53,11 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
         
         public func textViewDidChange(_ textView: UITextView) {
             parent.text = textView.text
+            
+            DispatchQueue.main.async { [weak self] in
+                guard let self else { return }
+                parent.height = textView.contentSize.height
+            }
         }
         
         public func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
