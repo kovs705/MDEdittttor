@@ -15,10 +15,7 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
     @Binding public var text: String
     @Binding public var height: CGFloat
     
-    public init(text: Binding<String>, height: Binding<CGFloat>) {
-        self._text = text
-        self._height = height
-    }
+    var isScrollEnabled: Bool = true
     
     public func makeUIView(context: Context) -> MDEdittttor {
         let editor = MDEdittttor.defaultMarkdownTextView()
@@ -26,6 +23,8 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
         editor.delegate = context.coordinator
         editor.textContainer.lineFragmentPadding = 0
         editor.textContainerInset = .zero
+        
+        editor.isScrollEnabled = isScrollEnabled
         
         return editor
     }
@@ -68,10 +67,9 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
 
 @available(iOS 16.0, *)
 #Preview(body: {
-    @State var text = "\(ExampleText.hello)"
-    @State var height: CGFloat = 100
     
-    return MDEdittttorWrapper(text: $text, height: $height)
-        .frame(minHeight: height)
+    MDEdittttorWrapper(text: .constant("\(ExampleText.hello)"), height: .constant(120))
+        .frame(minHeight: 120)
         .padding()
+        .colorScheme(.light)
 })

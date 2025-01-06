@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 16.0, *)
 /// Highlights atx-style Markdown headers.
 public final class MDHeader: HighlighterType {
     // From markdown.pl v1.0.1 <http://daringfireball.net/projects/markdown/>

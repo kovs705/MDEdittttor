@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 16.0, *)
 /// Text view with support for highlighting Markdown syntax.
 open class MDEdittttor: UITextView, UITextViewDelegate {
     
@@ -29,6 +30,7 @@ open class MDEdittttor: UITextView, UITextViewDelegate {
         
         let textView = MDEdittttor(frame: .zero, textStorage: textStorage)
         textView.translatesAutoresizingMaskIntoConstraints = false
+        textView.textColor = .label
         
         return textView
     }

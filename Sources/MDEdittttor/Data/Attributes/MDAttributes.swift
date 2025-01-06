@@ -8,10 +8,12 @@
 
 import UIKit
 
+@available(iOS 16.0, *)
 /// Encapsulates the attributes to use for styling various types of Markdown elements.
 public struct MarkdownAttributes {
     public var defaultAttributes: TextAttributes = [
-        .font: UIFont.preferredFont(forTextStyle: .body)
+        .font: UIFont.preferredFont(forTextStyle: .body),
+        .foregroundColor: UIColor.label
     ]
     
     public var strongAttributes: TextAttributes?

@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 16.0, *)
 /// Text storage with support for highlighting Markdown.
 open class MarkdownTextStorage: HighlighterTextStorage {
     fileprivate let attributes: MarkdownAttributes
