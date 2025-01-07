@@ -17,7 +17,7 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
     
     var isScrollEnabled: Bool
     
-    init(
+    public init(
         text: Binding<String>,
         height: Binding<CGFloat>,
         isScrollEnabled: Bool = true
