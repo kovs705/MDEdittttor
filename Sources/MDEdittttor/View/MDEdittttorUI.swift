@@ -15,7 +15,7 @@ public struct MDEdittttorWrapper: UIViewRepresentable {
     @Binding public var text: String
     @Binding public var height: CGFloat
     
-    var isScrollEnabled: Bool = true
+    public var isScrollEnabled: Bool = true
     
     public func makeUIView(context: Context) -> MDEdittttor {
         let editor = MDEdittttor.defaultMarkdownTextView()
